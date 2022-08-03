@@ -6,7 +6,7 @@ from datetime import datetime
 def main():
     logging.basicConfig(level=logging.DEBUG)
     message = setup_message(p_nr="P151104.SET",
-                            p_customer="Test Investment Unternehmensgruppe, Test Vermögensverwaltungs-GmbH & Co. Kg",
+                            p_customer="Test \"Investment\" Unternehmensgruppe, Test Vermögensverwaltungs-GmbH & Co. Kg",
                             p_desc="Rinderkennzeichnungsfleischetikettierungsüberwachungsaufgabenübertragungsgesetz",
                             basket_nr="92",
                             print_date=datetime.today().strftime('%d.%m.%Y'))
@@ -38,6 +38,7 @@ def setup_message(p_nr: str, p_customer: str, p_desc: str, basket_nr: str, print
     p_customer = p_customer.replace("Ö", "oe")
     p_customer = p_customer.replace("Ü", "ue")
     p_customer = p_customer.replace("Ä", "ae")
+    p_customer = p_customer.replace("\"", "")
 
     p_desc = p_desc.replace("ö", "oe")
     p_desc = p_desc.replace("ü", "ue")
@@ -45,6 +46,8 @@ def setup_message(p_nr: str, p_customer: str, p_desc: str, basket_nr: str, print
     p_desc = p_desc.replace("Ö", "oe")
     p_desc = p_desc.replace("Ü", "ue")
     p_desc = p_desc.replace("Ä", "ae")
+
+    p_desc = p_desc.replace("\"", "")
 
     """Add the projectnumber in the first line"""
     print_msg += ascii_text_formater(50, 50, 4, p_nr, font_size_mult_x=6, font_size_mult_y=6)
